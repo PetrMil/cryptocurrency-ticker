@@ -1,0 +1,29 @@
+li {
+  height: 100%;
+  width: 100%;
+}
+li h2 {
+  font-size: 1.25rem;
+}
+li p {
+  font-size: 1rem;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+}
+.container .tickers {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+.App {
+  text-align: center;
+}
+.header {
+  background-color: #222;
+  color: white;
+  font-size: 1.25rem;
+  margin: 0;
+  padding: 1rem;
+}

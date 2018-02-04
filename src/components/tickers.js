@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import '../less/tickers.less';
 import {Crypto} from './crypto.js';
 
@@ -9,33 +10,50 @@ export class Tickers extends Component {
 		this.state = {
 			data: [
 				{
-					id: 'Bitcoin',
-					short_name: 'BTC',
-					price: 1,
-					price_1hr: 1,
-					price_24hr: 1,
-					price_7d:1
+					name: "Bitcoin",
+					id: "bitcoin",
+					symbol: "BTC",
+					price_usd: 1,
+					percent_change_1h: 1,
+					percent_change_24h: 1,
+					percent_change_7d:1
 				},
-								{
-					id: 'Ethereum',
-					short_name: 'ETH',
-					price: 1,
-					price_1hr: 1,
-					price_24hr: 1,
-					price_7d:1
+				{
+					name: "Ethereum",
+					id: "ethereum",
+					symbol: "ETH",
+					price_usd: 1,
+					percent_change_1h: 1,
+					percent_change_24h: 1,
+					percent_change_7d:1
 				},
-								{
-					id: 'Litecoin',
-					short_name: 'LTC',
-					price: 1,
-					price_1hr: 1,
-					price_24hr: 1,
-					price_7d:1
+				{
+					name: "Litecoin",
+					id: "litecoin",
+					symbol: "LTC",
+					price_usd: 1,
+					percent_change_1h: 1,
+					percent_change_24h: 1,
+					percent_change_7d:1
 				}
 			]
 		}
 	}
 
+	componentDidMount() {
+			this.fetchCryptocurrencyData();
+			this.interval = setInterval(() => this.fetchCryptocurrencyData(), 10 * 1000);
+	}
+
+	fetchCryptocurrencyData() {
+			axios.get("https://api.coinmarketcap.com/v1/ticker/")
+					.then(response => {
+							var wanted = ["bitcoin", "ethereum", "litecoin"];
+							var result = response.data.filter(currency => wanted.includes(currency.id));
+							this.setState({ data: result});
+					})
+					.catch(err => console.log(err));
+	}
 
 	render() {
 		var html = this.state.data.map((currency) => {

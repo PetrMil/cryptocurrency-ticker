@@ -5,16 +5,16 @@ export class Crypto extends Component {
 
 	render() {
 
-		var {id, short_name, price, price_1hr, price_24hr, price_7d} = this.props.data;
+		var {name, id, symbol, price_usd, percent_change_1h, percent_change_24h, percent_change_7d} = this.props.data;
 
 		return (
 			<div>
-				<li className={id.toLowerCase()}>
-					<h2>{id} {short_name}</h2>
-					<h1>${price} </h1>
-					<p>{price_1hr}% 1hr</p>
-					<p>{price_24hr}% 24hrs</p>
-					<p>{price_7d}% 7days</p>
+				<li className={id}>
+					<h3>{name} ({symbol})</h3>
+					<h1>${(+price_usd).toFixed(2)} </h1>
+					<p>{percent_change_1h}% 1hr</p>
+					<p>{percent_change_24h}% 24hrs</p>
+					<p>{percent_change_7d}% 7days</p>
 				</li>
 			</div>
 			);

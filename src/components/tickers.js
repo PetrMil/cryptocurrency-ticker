@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../less/tickers.less';
 import {Crypto} from './crypto.js';
-import fetchData from './data.js';
+import {loadData} from './data.js';
 
 export class Tickers extends Component {
 
@@ -11,10 +11,17 @@ export class Tickers extends Component {
 			data: []
 		}
 	}
+
 	componentDidMount() {
-		this.fetchData();
-		this.interval = setInterval(() => this.fetchData(), 10 * 1000);
-console.log(fetchData());
+		loadData((result) => this.handleResult(result));
+		this.interval = setInterval(() => loadData((result) => this.handleResult(result)), 10 * 1000);
+	}
+
+	handleResult(data) {
+		console.log(data);
+		this.setState({
+			data: data
+		});
 	}
 
 	render() {

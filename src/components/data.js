@@ -1,19 +1,16 @@
 
 import axios from 'axios';
 
-let fetchData = function(callback) { 
-	return callback(); 
-}; 
+export let loadData = function(callback) {
+	fetchCryptocurrencyData(callback);
+};
 
-let fetchCryptocurrencyData = function() { 
-	axios.get("https://api.coinmarketcap.com/v1/ticker/") 
-		.then(response => { 
-			var wanted = ["bitcoin", "ethereum", "litecoin"]; 
-			var result = response.data.filter(currency => wanted.includes(currency.id)); 
-			return result; 
-		}) 
-	.catch(err => console.log(err)); 
-} 
-
-
-export default fetchData(fetchCryptocurrencyData);
+let fetchCryptocurrencyData = function(callback) {
+	axios.get("https://api.coinmarketcap.com/v1/ticker/")
+		.then(response => {
+			var wanted = ["bitcoin", "ethereum", "litecoin"];
+			var result = response.data.filter(currency => wanted.includes(currency.id));
+			return callback(result);
+		})
+	.catch(err => console.log(err));
+}

@@ -13,12 +13,11 @@ export class Tickers extends Component {
 	}
 
 	componentDidMount() {
-		loadData((result) => this.handleResult(result));
-		this.interval = setInterval(() => loadData((result) => this.handleResult(result)), 10 * 1000);
+		loadData(result => this.handleResult(result));
+		this.interval = setInterval(() => loadData(result => this.handleResult(result)), 10 * 1000);
 	}
 
 	handleResult(data) {
-		console.log(data);
 		this.setState({
 			data: data
 		});

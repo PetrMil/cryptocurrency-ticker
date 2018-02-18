@@ -1,11 +1,9 @@
 
 import axios from 'axios';
 
-export let loadData = function(callback) {
-	fetchCryptocurrencyData(callback);
-};
+export let loadData = callback =>	fetchCryptocurrencyData(callback);
 
-let fetchCryptocurrencyData = function(callback) {
+let fetchCryptocurrencyData = callback => {
 	axios.get("https://api.coinmarketcap.com/v1/ticker/")
 		.then(response => {
 			var wanted = ["bitcoin", "ethereum", "litecoin"];
